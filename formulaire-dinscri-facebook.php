@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>formulaire dinscription</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width = device-width, initial-scale=1">
+	
 	<style type="text/css">
 		body{
 			margin: 0;
@@ -395,7 +397,7 @@
 	<span class="pswdspan" id="pswdspan"></span>
 	<span class="ddnspan" id="ddnspan"></span>
 	<span class="genrespan" id="genrespan"></span>
-	<form name="f" action="" method="get">
+	<form name="f" action="capatcha.php" method="get" id="formdinscri">
 	<p class="ddpp">créer un compte</p>
 	<p class="dddp">c'est rapide et facile</p>
 	<input type="text" name="prenom" placeholder="prénom" id="pin">

@@ -5,6 +5,9 @@
 	<title>authentif</title>
 	<meta charset="utf-8">
 	<style type="text/css">
+body	{
+	margin: 0;
+}	
 		.pdiv{
 	width: 100%;
 	height: 600px;
@@ -21,6 +24,17 @@
 	background-color: white;
 	border-radius: 4px;
 }
+@media (max-width: 679px){
+	.pdiv .pddiv{
+		width: 99%;
+		height: 300px;
+		position: absolute;
+		top: 33px;
+		left: 1px;
+		
+		border-radius: 0;
+	}
+}
 .pdiv .pddiv form input{
 	width: 300px;
 	height: 40px;
@@ -31,6 +45,15 @@
 	text-transform: capitalize;
 	word-spacing: 1px;
 	font-size: 16px;
+}
+@media (max-width: 679px){
+	.pdiv .pddiv form input{
+		width: 70%;
+		
+		
+		font-size: 12px;
+		word-spacing: 0.2px;
+	}
 }
 .pdiv .pddiv p a{
 	color: blue;
@@ -68,6 +91,14 @@
 	word-spacing: 3px;
 	text-align: center;
 }
+@media (max-width: 679px){
+	.pdiv .pp{
+		position: absolute;
+		left: 20%;
+		bottom: 20%;
+		width: 60%;
+	}
+}
 .pp a{
 	font-size:18px; 
 }
@@ -76,6 +107,11 @@
 	list-style-type: none;
 	width: 90%;
 	column-width: 30px;
+}
+@media (max-width: 679px){
+	.ddiv ul{
+		column-count: 4;
+	}
 }
 .ddiv ul li a{
 	text-decoration: none;
@@ -231,9 +267,13 @@ if((isset($_GET['inscri'])) AND (isset($_GET['email'])) AND (isset($_GET['motdep
 	
 
 }
-$req=$bdd -> query('SELECT * FROM compte');
-$reponse=$req->fetch();
-if(($reponse['email'] == $email) AND ($reponse['motdepasse'] == $motdepasse)){
+$req=$bdd -> prepare('SELECT COUNT(*) FROM comptee WHERE email = ? ');
+$req ->execute(array($email ));
+$existemail=$req -> fetchcolumn();
+$req1=$bdd -> prepare('SELECT COUNT(*) FROM comptee WHERE motdepasse = ? ');
+$req1 ->execute(array($motdepasse ));
+$existpasse=$req1 -> fetchcolumn();
+if(($existemail > 0) AND ($existpasse > 0)){
 	?>
 	<script type="text/javascript">
 		var from=document.getElementById('fromm');
@@ -241,7 +281,7 @@ if(($reponse['email'] == $email) AND ($reponse['motdepasse'] == $motdepasse)){
 	</script>
 	<?php
 }
-elseif(($reponse['email'] == $email) AND ($reponse['motdepasse'] !== $motdepasse)){
+elseif(($existemail > 0) AND ($existpasse == 0)){
 	?>
 	<script type="text/javascript">
 		var mspan=document.getElementById('mspan');
@@ -252,7 +292,7 @@ elseif(($reponse['email'] == $email) AND ($reponse['motdepasse'] !== $motdepasse
 	</script>
 	<?php
 }
-elseif (($reponse['email'] !== $email) AND ($reponse['motdepasse'] == $motdepasse)) {
+elseif (($existemail == 0) AND ($existpasse > 0)) {
 	?>
 	<script type="text/javascript">
 		var nea=document.createElement('a');

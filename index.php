@@ -5,11 +5,17 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="C:\wamp64\www\facesite\fichier-css">
 	<style type="text/css">
+		body{
+			margin: 0;
+		}
 		.pdiv{
-	width: 100%;
+	width: 100%; 	
 	height: 600px;
 	position: relative;
 	background-color: rgb(228,228,228);
+}
+@media (max-width: 679px){
+	.pdiv {height: 800px;}
 }
 .pdiv .ppdiv{
 	width: 30%;
@@ -20,6 +26,18 @@
 
 
 }
+@media (max-width: 679px){
+	.ppdiv{
+		width: 100%;
+		height: 170px;
+		position: absolute;
+		top: 0;
+
+
+
+	}
+	
+}
 .pdiv .ppdiv img{
 	width: 250px;
 	height: 80px;
@@ -27,12 +45,30 @@
 	left: 12%;
 
 }
+@media (max-width: 679px){
+	.pdiv .ppdiv img{
+		width: 400px;
+		height: 100px;
+		position: absolute;
+		left: 5%;
+
+	}
+}
 .pdiv .ppdiv p{
 	width: 	500px;
 	font-size: 30px;
 	position: absolute;
 	top: 70px;
 	left: 12%;
+}
+@media (max-width: 679px){
+	.pdiv .ppdiv p{
+		width: 400px;
+		font-size: 20px;
+		position: absolute;
+		top: 80px;
+		left: 5%;
+	}
 }
 .pdiv .pddiv{
 	width: 25%;
@@ -43,6 +79,17 @@
 	background-color: white;
 	border-radius: 4px;
 }
+@media (max-width: 679px){
+	.pdiv .pddiv{
+		width: 99%;
+		height: 300px;
+		position: absolute;
+		top: 330px;
+		left: 1px;
+		
+		border-radius: 0;
+	}
+}
 .pdiv .pddiv form input{
 	width: 300px;
 	height: 40px;
@@ -50,9 +97,19 @@
 	border-radius: 2px;
 	border-width: 0.2px;
 	border-color: rgb(228,228,228);
-	text-transform: capitalize;
+rgb(233,219,219)		text-transform: capitalize;
 	word-spacing: 1px;
 	font-size: 16px;
+}
+
+@media (max-width: 679px){
+	.pdiv .pddiv form input{
+		width: 70%;
+		
+		
+		font-size: 12px;
+		word-spacing: 0.2px;
+	}
 }
 .pdiv .pddiv p a{
 	color: blue;
@@ -90,6 +147,14 @@
 	word-spacing: 3px;
 	text-align: center;
 }
+@media (max-width: 679px){
+	.pdiv .pp{
+		position: absolute;
+		right: 20%;
+		bottom: 10%;
+		width: 60%;
+	}
+}
 .pp a{
 	font-size:18px; 
 }
@@ -98,6 +163,11 @@
 	list-style-type: none;
 	width: 90%;
 	column-width: 30px;
+}
+@media (max-width: 679px){
+	.ddiv ul{
+		column-count: 4;
+	}
 }
 .ddiv ul li a{
 	text-decoration: none;

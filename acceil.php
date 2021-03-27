@@ -1,16 +1,29 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>acceil</title>
 	<meta charset="utf-8">
 	<style type="text/css">
+		body{
+			margin: 0;
+		}
 		.pdiv {
 			
 			position: relative;
 			left: 15%;
 			width: 70%;
 			height: 330px;
-			background-color: purple;
+			
+			background-image: url("covid19.jpg");
+		}
+		@media (max-width: 679px){
+			.pdiv{
+				width: 100%;
+				height: 200px;
+				left: 0;
+			}
 		}
 		.pdiv #bchange{
 			width: 230px;
@@ -22,8 +35,16 @@
 			color: black;
 			font-weight: bold;
 		}
+		@media (max-width: 679px){
+			.pdiv #bchange{
+				width: 180px;
+				height: 40px;
+				bottom: 30px;
+				right: 1%;
+			}
+		}
 		.ppdiv{
-			background-color: black;
+			background-image: url("woman_child_window.jpg");
 			width: 150px;
 			height: 150px;
 			position: absolute;
@@ -32,6 +53,12 @@
 			border-radius: 50%;
 
 
+		}
+		@media (max-width: 679px){
+			.ppdiv{
+				
+				left: 30%;
+			}
 		}
 		.nom{
 			text-align: center;
@@ -51,10 +78,22 @@
 			width: 70%;
 			left: 15%;
 		}
+		@media (max-width: 679px){
+			.phr{
+				width: 100%;
+				left: 0;
+			}
+		}
 		table{
 			width: 70%;
 			position: relative;
 			left: 15%;
+		}
+		@media (max-width: 679px){
+			table{
+				left: 0;
+				width: 100%;
+			}
 		}
 		table tr td a{
 			text-decoration: none;
@@ -65,6 +104,12 @@
 			width: 70%;
 			left: 15%;
 
+		}
+		@media (max-width: 679px){
+			.dhr{
+				width: 100%;
+				left: 0;
+			}
 		}
 		.actualite{
 			background-color: white;
@@ -78,6 +123,11 @@
 			border-radius: 5%;
 
 
+		}
+		@media (max-width: 679px){
+			.actualite{
+				display: none;
+			}
 		}
 		.acthr{
 			width: 100%;
@@ -141,6 +191,12 @@
 			border-width: 0.1px;
 
 		}
+		@media (max-width: 679px){
+			.intro{
+				width: 90%;
+				left: 5%;
+			}
+		}
 		.pagepub{
 			width: 100%;
 			height: 1000px;
@@ -198,6 +254,13 @@
 			width: 34%;
 			height: 90px;
 			background-color: white;
+		}
+		@media (max-width: 679px){
+			.publication{
+				width: 90%;
+				left: 5%;
+				top: 540px;
+			}
 		}
 		.publication .titre{
 			text-transform: capitalize;
@@ -260,6 +323,13 @@
 			border :0.2px solid rgb(100,100,100);
 			border-radius: 8%;
 		}
+		@media (max-width: 679px){
+			.photo{
+				width: 90%;
+				left:5%;
+
+			}
+		}
 		.photo .titrephoto{
 			font-weight: bold;
 			font-size: x-large;
@@ -285,6 +355,12 @@
 			top: 380px;
 			border :0.2px solid rgb(100,100,100);
 			border-radius: 8%;
+		}
+		@media (max-width: 679px){
+			.amie{
+				width: 90%;
+				left: 5%;
+			}
 		}
 		.amie .titreami{
 			font-weight: bold;
@@ -314,6 +390,13 @@
 			border-radius: 4%;
 			
 
+		}
+		@media (max-width: 679px){
+			.statu{
+				width: 90%;
+				left: 5%;
+				top: 660px;
+			}
 		}
 		.statu .ssimg{
 			position: absolute;
@@ -429,10 +512,21 @@
 			font-weight: bold;
 
 		}
+		@media (max-width: 679px){
+			#filactualite{
+				width: 90%;
+				top: 970px;
+				
+				left: 5%;
+			}
+		}
 	</style>
 </head>
-<body>
+<body >
+	
 <?php
+
+
 try
 {
 	$bdd=new PDO("mysql:host=localhost;dbname=facesitedbd","root","");
@@ -446,21 +540,22 @@ if((isset($_GET['submit'])) AND (isset($_GET['email'])) AND (isset($_GET['motdep
 	$email = $_GET['email'];
 	$motdepasse=$_GET['motdepasse'];
 }
-$req=$bdd->query('SELECT * FROM compte Where email=\''.$email.'\'');
+$req=$bdd->prepare('SELECT * FROM comptee Where email=?');
+$req-> execute(array($email));
 $resultat=$req->fetch();
 ?>
-<div class="pdiv" >
+<div class="pdiv" id="pdiv">
 
 	<button id="bchange">changer la photo de couverture</button>
 	<div class="ppdiv"></div>
 </div>
-<p class="nom">nom profil</p>
-<p class="bio"><a href="">ajouter une biographie</a></p>
+<p class="nom"><?php echo $resultat["nomutilis"];?></p>
+<p class="bio"><a href=""><?php echo $resultat["biografi"];?></a></p>
 <hr class="phr">
 <table>
 	<tr>
 		<td ><a href="" onmouseover="reaction(this)" onmouseout="reactioni(this)" target="divni">publication</a></td>
-		<td ><a href="" onmouseover="reaction(this)" onmouseout="reactioni(this)">à propos</a></td>
+		<td ><a href="" onmouseover="reaction(this)" onmouseout="reactioni(this)" id="dezbouton">à propos</a></td>
 		<td><a href="" onmouseover="reaction(this)" onmouseout="reactioni(this)">amis</a></td>
 		<td><a href="" onmouseover="reaction(this)" onmouseout="reactioni(this)">photos</a></td>
 		<td><a href="" onmouseover="reaction(this)" onmouseout="reactioni(this)">plus</a></td>
@@ -506,7 +601,7 @@ $resultat=$req->fetch();
 </div>
 <div class="intro">
 	<p class="titro">intro</p>
-	<span class="pos">de tunis</span>
+	<span class="pos">de  <?php echo $resultat["natinalite"];?></span>
 	<br>
 	<br>
 	<button class="modinfo">modifier les infos</button>
@@ -561,8 +656,16 @@ $resultat=$req->fetch();
 	var statu=document.getElementById('statu');
 	
 	var pagepub=document.getElementById('pagepub');
+	var largeursxren=document.body.clientWidth;
+	
+	if(largeursxren>=1300){
 	var j=240;
 	var i=280;
+}
+else{
+	var j=640;
+	var i=680;
+}
 	filactualite.addEventListener('click',nouvelle);
 	function nouvelle(){
 		for(var k=0;k<5;k++){
@@ -587,9 +690,28 @@ $resultat=$req->fetch();
 		e.style.borderColor="black";
 		e.style.borderWidth="0.2px";
 	}
+var dezbouton=document.getElementById('dezbouton');
+var pagepub=document.getElementById('pagepub');
+dezbouton.addEventListener('click',trans);
+function trans(){
+	pagepub.style.visibility="hidden";
+}
 </script>
 
 </div>
-
+<div class="apropos">
+	<div class="papropos">
+		<p>a propos</p>
+		<ul>
+			<li>vue d'ensemble</li>
+			<li>emploi et scolaritée</li>
+			<li>lieux de résidence</li>
+			<li>information generales et coordonnée</li>
+			<li>familles et relations </li>
+			<li>détails sur vous</li>
+			<li>événements marquants</li>
+		</ul>
+	</div>
+</div>
 </body>
 </html>

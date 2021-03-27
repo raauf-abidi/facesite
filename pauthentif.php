@@ -13,12 +13,34 @@ if((isset($_GET['inscri'])) AND (isset($_GET['email'])) AND (isset($_GET['motdep
 	
 
 }
-$req=$bdd -> query('SELECT * FROM compte');
-$reponse=$req->fetch();
-if(($reponse['email'] == $email) AND ($reponse['motdepasse'] == $motdepasse)){
+$req=$bdd -> prepare('SELECT COUNT(*) FROM comptee WHERE email = ? AND motdepasse = ?');
+$req ->execute(array($email , $motdepasse));
+
+//$reponse=$req->fetch();
+$number=$req -> fetchcolumn();
+//if(($reponse['email'] == $email) AND ($reponse['motdepasse'] == $motdepasse)){
+if($number > 0){
 	include('acceil.php');
+
 }
 else{
 	include('authentif.php');
 }
+
+/*$db='C:\wamp64\www\facesite\facesitedb.mdb';
+if (!file_exists($db)) {
+	# code...
+	die('erreur de trouver sa');
+}
+else{
+	echo "suuccess";
+}
+$db=new PDO("odbc: DRIVER={Microsoft Access Driver (*.mdb)}; Dbq=$db;");
+/*
+echo "hell word";
+$connection = odbc_connect('facesitedb', "raouf","raouf" );
+
+if(!$connection){
+	echo "erreur";
+}*/
 ?>

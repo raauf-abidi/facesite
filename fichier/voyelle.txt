@@ -1,0 +1,2 @@
+ceci est un texte dans une fichier texte ceci en va compter le nombre de voyelle utilise avec un script php
+puis laffiche en utilisant html css et java script
